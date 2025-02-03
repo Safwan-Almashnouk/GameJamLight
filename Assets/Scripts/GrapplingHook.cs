@@ -6,7 +6,7 @@ public class GrapplingHook : MonoBehaviour
 {
     [SerializeField] private float grappleLength;
     [SerializeField] private LayerMask grappleLayer;
-
+    [SerializeField] private LineRenderer rope;
     private Vector3 grapplePoint;
     private DistanceJoint2D joint;
     // Start is called before the first frame update
@@ -14,6 +14,7 @@ public class GrapplingHook : MonoBehaviour
     {
         joint = gameObject.GetComponent<DistanceJoint2D>();
         joint.enabled = false;
+        rope.enabled = false;
     }
     void Update()
     {
@@ -33,11 +34,20 @@ public class GrapplingHook : MonoBehaviour
                 joint.connectedAnchor = grapplePoint;
                 joint.enabled = true;
                 joint.distance = grappleLength;
+                rope.SetPosition(0, grapplePoint);
+                rope.SetPosition(1, transform.position);
+                rope.enabled = true;
             }
         }
         if(Input.GetMouseButtonUp(0))
         {
             joint.enabled = false;
+            rope.enabled = false;
+        }
+
+        if (rope.enabled == true)
+        {
+            rope.SetPosition(1, transform.position);
         }
     }
 }
