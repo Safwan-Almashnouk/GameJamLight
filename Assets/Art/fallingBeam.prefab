@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8437360648047682636}
   - component: {fileID: 3038856287409102892}
   - component: {fileID: 455499508541851896}
-  - component: {fileID: 6876598203952983278}
+  - component: {fileID: 3104090883721024378}
   m_Layer: 0
-  m_Name: beam
+  m_Name: fallingBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,9 +29,9 @@ Transform:
   m_GameObject: {fileID: 732846500757645311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 47.0661, y: 39.5305, z: 0}
-  m_LocalScale: {x: 18.6, y: 83.73103, z: 18.6}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 4.0341, y: 37.1727, z: 0}
+  m_LocalScale: {x: 27.72, y: 83.73103, z: 27.72}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: -20.73
+  m_GravityScale: 3.71
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  Rof: 1.5
---- !u!95 &6876598203952983278
+  Rof: 1
+--- !u!95 &3104090883721024378
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ Animator:
   m_GameObject: {fileID: 732846500757645311}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dea9bec66859c8e42ac5ec9fcf9e20da, type: 2}
+  m_Controller: {fileID: 9100000, guid: 70614f83bed1267479ae31899366cc9a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

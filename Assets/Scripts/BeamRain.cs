@@ -24,7 +24,7 @@ public class BeamRain : MonoBehaviour
     {
         // Spawn main beam at player's position
         Vector3 playerTarget = new Vector3(player.position.x, -2, player.position.z);
-        Quaternion rotation = Quaternion.Euler(0, 0 , -90) ; // Default rotation
+        Quaternion rotation = Quaternion.Euler(0, 0 , 180) ; // Default rotation
         Instantiate(dangerSign, playerTarget, rotation);
         spawnBeam(playerTarget, rotation);
 

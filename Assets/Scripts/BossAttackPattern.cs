@@ -9,10 +9,15 @@ public class BossAttackPattern : MonoBehaviour
     private bool DoneAttacking = true;
     public float timer;
     private BeamRain Br;
+    public Laser beam;
+    public SunAttack Wave;
+    private Animator animator;
     
     void Start()
     {
       Br = GetComponent<BeamRain>();
+      animator = GetComponent<Animator>();
+     
     }
 
     // Update is called once per frame
@@ -22,6 +27,8 @@ public class BossAttackPattern : MonoBehaviour
         {
             AttackPattern();
         }
+       
+     
     }
 
 
@@ -32,42 +39,58 @@ public class BossAttackPattern : MonoBehaviour
         
         if (randomChoice == 10)
         {
-
+            Debug.Log("rain");
+            
             RainBeam();
             DoneAttacking = false;
         }
         if (randomChoice == 20) 
         {
-            RainBeam();
+            Debug.Log("beam");
+           
+            BeamAttack();
             DoneAttacking = false;
         }
         if(randomChoice == 30)
         {
-            RainBeam(); 
+           
+            Debug.Log("extra");
+            WavePattern(); 
             DoneAttacking = false;
         }
        
     }
 
-     void RainBeam()
+    void RainBeam()
     {
+        animator.Play("Slam");
         Br.RainAttack();
         StartCoroutine(Cooldown());
     }
 
-    void SunPattern()
+    void WavePattern()
     {
-
+        animator.Play("Rain");
+        Wave.enabled = true;
+        Wave.TidalWave();
+        StartCoroutine(Cooldown());
     }
 
     void BeamAttack()
     {
-
+        animator.Play("Beam");
+        beam.ShootLaser();
+        StartCoroutine(Cooldown());
     }
+
+   
+
+
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(timer);
         DoneAttacking = true;
+        Wave.enabled = false;
     }
 }
