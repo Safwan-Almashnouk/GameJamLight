@@ -32,7 +32,7 @@ public class Laser : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(audioSource.volume);
+       
     }
     private IEnumerator ShootAndFollowLaser()
     {
@@ -53,6 +53,11 @@ public class Laser : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Boss")) // Replace with actual tag
                 {
                     continue; // Skip this object
+                }
+                if (hit.collider.gameObject.CompareTag("Player"))
+                {
+                    Health health = hit.collider.gameObject.GetComponent<Health>();
+                    health.Damage(10);
                 }
                 if (_hit)
                 {

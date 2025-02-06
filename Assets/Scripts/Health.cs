@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
+    [SerializeField] internal int health = 100;
     private const int MAX_HEALTH = 100;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            // Damage(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            // Heal (10);
-        }
+            
     }
 
     public void Damage(int amount)

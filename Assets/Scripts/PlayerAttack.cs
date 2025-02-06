@@ -10,9 +10,11 @@ public class PlayerAttack : MonoBehaviour
 
     private float timeToAttack = 0.25f;
     private float timer = 0f;
+    private Animator animator;
     void Start()
     {
         attackArea = transform.GetChild(1).gameObject;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -20,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             Attack();
+            animator.Play("Attack");
         }
 
         if(attacking)

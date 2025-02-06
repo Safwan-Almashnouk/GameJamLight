@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,31 +16,56 @@ public class PlayerMovement : MonoBehaviour
     public float dashForce;
     private bool canMove = true;
     [SerializeField] float jumpForce;
+    private Animator animator;
+    private Vector2 moveInput;
+    private Vector2 moveDirection;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         action = input.actions.FindAction("Movement");
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        transform.Translate(moveDirection * Speed * Time.deltaTime);
+    
 
-    }
+}
 
-    void MovePlayer()
+    public void MovePlayer(InputAction.CallbackContext context)
     {
-        if (canMove == true)
-        {
-            Vector2 direction = action.ReadValue<Vector2>();
-            transform.position += new Vector3(direction.x, 0, 0) * Time.deltaTime * Speed;
-            canDash = true;
-        }
-    }
+        
+            if (canMove == true)
+            {
+                moveInput = context.ReadValue<Vector2>();
+                moveDirection = moveInput.normalized;
+                canDash = true;
+                animator.Play("Running");
 
+            if (moveDirection.x < 0) // Moving left
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (moveDirection.x > 0) // Moving right
+            {
+                spriteRenderer.flipX = false;
+            }
+
+            if (context.canceled)
+            {
+                animator.Play("Idle");
+            }
+        }
+
+ }
+           
+   
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)
