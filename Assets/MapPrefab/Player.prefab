@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &283451123336195331
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 14
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -267,7 +267,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03, y: -0.37, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5923973088505574561}
@@ -317,7 +317,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -884696879, guid: b954480fa8bc5e148956002dbb23047f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9748427, g: 0.9748427, b: 0.9748427, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -436,6 +436,7 @@ MonoBehaviour:
   Speed: 15
   dashForce: 30
   jumpForce: 10
+  attackArea: {fileID: 182289196245671875}
 --- !u!50 &7183309744021130996
 Rigidbody2D:
   serializedVersion: 4
@@ -520,7 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf6b09ebb4077a43b01bf167c09479b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grappleLength: 3
+  grappleLength: 5
+  maxGrappleRange: 10
   grappleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -540,8 +542,8 @@ DistanceJoint2D:
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 1.280344, y: -1.5547037}
-  m_ConnectedAnchor: {x: 0, y: 0}
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 1.463376, y: 2.3832147}
   m_AutoConfigureDistance: 0
   m_Distance: 5
   m_MaxDistanceOnly: 0

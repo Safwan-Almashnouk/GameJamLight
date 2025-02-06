@@ -16,7 +16,7 @@ public class Respawn : MonoBehaviour
     {
         if(health.health <= 0)
         {
-            Invoke("Retry" ,2f);
+            Invoke("Retry" ,0f);
         }
     }
 

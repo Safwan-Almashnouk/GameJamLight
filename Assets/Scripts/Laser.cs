@@ -56,13 +56,14 @@ public class Laser : MonoBehaviour
                 }
                 if (hit.collider.gameObject.CompareTag("Player"))
                 {
-                    Health health = hit.collider.gameObject.GetComponent<Health>();
-                    health.Damage(10);
+                   
+                    
                 }
                 if (_hit)
                 {
                     Draw2DRay(laserFirePoint.position, _hit.point);
-
+                    Health health = hit.collider.gameObject.GetComponent<Health>();
+                    health.Damage(10);
                 }
                 else
                 {

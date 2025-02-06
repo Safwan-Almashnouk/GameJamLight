@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 moveDirection;
     private SpriteRenderer spriteRenderer;
+    public GameObject attackArea;
 
     void Start()
     {
@@ -51,10 +52,16 @@ public class PlayerMovement : MonoBehaviour
             if (moveDirection.x < 0) // Moving left
             {
                 spriteRenderer.flipX = true;
+                Vector3 scale = attackArea.transform.localScale;
+                scale.x = -1;
+                attackArea.transform.localScale = scale;
             }
             else if (moveDirection.x > 0) // Moving right
             {
                 spriteRenderer.flipX = false;
+                Vector3 scale = attackArea.transform.localScale;
+                scale.x = 1;
+                attackArea.transform.localScale = scale;
             }
 
             if (context.canceled)
