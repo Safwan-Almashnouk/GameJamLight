@@ -11,6 +11,8 @@ public class Laser : MonoBehaviour
     [SerializeField] private float initialDelay;
     [SerializeField] private float followDuration;
     RaycastHit2D[] hits;
+    private AudioSource audioSource;
+    private float originalVolume;
 
     private void Awake()
     {
@@ -18,6 +20,8 @@ public class Laser : MonoBehaviour
         PPos = GameObject.Find("Player").GetComponent<Transform>();
 
         m_lineRenderer.enabled = false;
+        audioSource = GetComponent<AudioSource>();
+        originalVolume = audioSource.volume;
     }
 
     public void ShootLaser()
@@ -26,6 +30,10 @@ public class Laser : MonoBehaviour
         StartCoroutine(ShootAndFollowLaser());
     }
 
+    private void Update()
+    {
+        Debug.Log(audioSource.volume);
+    }
     private IEnumerator ShootAndFollowLaser()
     {
         Vector2 playerInitialPos = PPos.position;
@@ -67,7 +75,8 @@ public class Laser : MonoBehaviour
 
             m_lineRenderer.SetPosition(0, startPos);
             m_lineRenderer.SetPosition(1, endPos);
-
+            audioSource.volume = originalVolume;
+            audioSource.Play();
 
             Invoke("Destroy", 0.5f); // Waits 2 seconds before calling DoSomething()
 
@@ -75,8 +84,23 @@ public class Laser : MonoBehaviour
 
        
     }
+
+    public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float start = audioSource.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
+    }
     private void Destroy()
     {
         m_lineRenderer.enabled = false;
+        StartCoroutine(StartFade(audioSource, 0.5f, 0));
+        
     }
 }
