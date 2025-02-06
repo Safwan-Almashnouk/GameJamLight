@@ -12,11 +12,15 @@ public class BossAttackPattern : MonoBehaviour
     public Laser beam;
     public SunAttack Wave;
     private Animator animator;
+    public AudioClip slam, star;
+    private AudioSource audioSource;
     
     void Start()
     {
       Br = GetComponent<BeamRain>();
       animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        
      
     }
 
@@ -39,14 +43,14 @@ public class BossAttackPattern : MonoBehaviour
         
         if (randomChoice == 10)
         {
-            Debug.Log("rain");
+           
             
             RainBeam();
             DoneAttacking = false;
         }
         if (randomChoice == 20) 
         {
-            Debug.Log("beam");
+            
            
             BeamAttack();
             DoneAttacking = false;
@@ -54,7 +58,7 @@ public class BossAttackPattern : MonoBehaviour
         if(randomChoice == 30)
         {
            
-            Debug.Log("extra");
+            
             WavePattern(); 
             DoneAttacking = false;
         }
@@ -64,6 +68,7 @@ public class BossAttackPattern : MonoBehaviour
     void RainBeam()
     {
         animator.Play("Slam");
+        audioSource.PlayOneShot(slam);
         Br.RainAttack();
         StartCoroutine(Cooldown());
     }
@@ -71,6 +76,7 @@ public class BossAttackPattern : MonoBehaviour
     void WavePattern()
     {
         animator.Play("Rain");
+        audioSource.PlayOneShot(star);
         Wave.enabled = true;
         Wave.TidalWave();
         StartCoroutine(Cooldown());
@@ -78,6 +84,7 @@ public class BossAttackPattern : MonoBehaviour
 
     void BeamAttack()
     {
+        
         animator.Play("Beam");
         beam.ShootLaser();
         StartCoroutine(Cooldown());
